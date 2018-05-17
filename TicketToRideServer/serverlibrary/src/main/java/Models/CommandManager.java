@@ -32,7 +32,8 @@ public class CommandManager {
         }
         else
         {
-            commandMap.put(username,command);
+            Command[] newCommands= {command};
+            commandMap.put(username,newCommands);
         }
     }
 
