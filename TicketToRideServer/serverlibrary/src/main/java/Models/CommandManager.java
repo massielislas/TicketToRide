@@ -2,6 +2,7 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,21 +13,26 @@ import java.util.Map;
 public class CommandManager {
 
     private final static CommandManager instance = new CommandManager();
+    private CommandManager()
+    {
+        commandMap = new HashMap<>();
+    }
     private Map<UserPass,Command[]> commandMap;
+
     public static CommandManager getInstance() {
         return instance;
     }
-    public void addCommands(UserPass username, Command[] commands) {
+
+    public void addCommand(UserPass username, Command command) {
         if(commandMap.containsKey(username)) {
             Command[] previousCommands = commandMap.get(username);
-            ArrayList<Command> newCommandList = new ArrayList<>(Arrays.asList(commands));
             ArrayList<Command> oldCommandList = new ArrayList<>(Arrays.asList(previousCommands));
-            oldCommandList.addAll(newCommandList);
-            commandMap.put(username, (Command[]) newCommandList.toArray());
+            oldCommandList.add(command);
+            commandMap.put(username, (Command[]) oldCommandList.toArray());
         }
         else
         {
-            commandMap.put(username,commands);
+            commandMap.put(username,command);
         }
     }
 
@@ -37,9 +43,17 @@ public class CommandManager {
             System.arraycopy(allCommands,lastCommand,toReturn,0,allCommands.length-lastCommand);
         }
     }
-    public void addCommandsMultipleUsers(List<UserPass> userList, Command[] commands){
+    public void addCommandMultipleUsers(List<UserPass> userList, Command command){
         for(UserPass user:userList) {
-            addCommands(user,commands);
+            addCommand(user,command);
+        }
+    }
+
+    public void addCommandAllUSers(Command command)
+    {
+        for(UserPass u: commandMap.keySet())
+        {
+            addCommand(u,command);
         }
     }
 

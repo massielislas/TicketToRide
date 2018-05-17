@@ -9,6 +9,7 @@ import clientResult.LoginRegisterResult;
 import clientResult.Result;
 import communication.ClientCommunicator;
 import communication.Encoder;
+import communication.Poller;
 
 public class TicketToRideProxy implements ITicketToRide {
 
@@ -31,6 +32,8 @@ public class TicketToRideProxy implements ITicketToRide {
             String json = client.post(url, jsonStr);
             if (json == null) return null;
             Object result = Encoder.Decode(json, LoginRegisterResult.class);
+            //Start the poller
+            Poller.getInstance().run(username);
             return (LoginRegisterResult)result;
         }
         catch (MalformedURLException exception)
@@ -58,6 +61,8 @@ public class TicketToRideProxy implements ITicketToRide {
             String json = client.post(url, jsonStr);
             if (json == null) return null;
             Object result = Encoder.Decode(json, LoginRegisterResult.class);
+            //Start the poller
+            Poller.getInstance().run(username);
             return (LoginRegisterResult)result;
         }
         catch (MalformedURLException exception)
