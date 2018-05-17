@@ -58,4 +58,8 @@ public class CommandManager {
         }
     }
 
+    public void initializeUser(UserPass username){
+            commandMap.put(username,new Command[0]);
+    }
+
 }

@@ -24,6 +24,7 @@ public class TicketToRideFacade implements ITicketToRide {
         //If they don't, add them to the Map of players that currently exist
         else {
             Server.addUserPass(username, password);
+            CommandManager.getInstance().initializeUser(username);
             return new LoginRegisterResult(true);
         }
     }
@@ -39,6 +40,7 @@ public class TicketToRideFacade implements ITicketToRide {
         }
         //Otherwise return true and log them into the App
         else {
+            CommandManager.getInstance().initializeUser(username);
             return new LoginRegisterResult(true);
         }
     }
@@ -65,6 +67,16 @@ public class TicketToRideFacade implements ITicketToRide {
         }
         else {
             Server.addGameToQueue(newGame);
+            String[] methodParamTypes = {"Game.type"};
+            Object[] methodParams = {newGame};
+            Command newGameCommand = new Command("ClientFacade",
+                    "getInstance",
+                    "createNewGame",
+                    null,
+                    null,
+                    methodParamTypes,
+                    methodParams);
+            CommandManager.getInstance().addCommandAllUSers(newGameCommand);
             return new GameResult(newGame);
         }
     }
