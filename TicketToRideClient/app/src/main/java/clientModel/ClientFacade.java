@@ -10,7 +10,12 @@ import clientModel.Command;
 
 public class ClientFacade
 {
-    public void executeCommands(ArrayList<Command> commands)
+    private static final ClientFacade instance = new ClientFacade();
+    private ClientFacade(){}
+    public static ClientFacade getInstance(){
+        return instance;
+    }
+    public void executeCommands(Command[] commands)
     {
         for(Command c: commands){
             c.Execute();

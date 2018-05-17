@@ -1,9 +1,11 @@
 package communication;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import clientModel.ClientFacade;
 import clientModel.Command;
 import clientModel.UserPass;
 import clientResult.PollResult;
@@ -52,12 +54,16 @@ public class Poller {
             String toSend = Encoder.Encode(pollCommand);
             String toDecode = ClientCommunicator.getClient().post(url,toSend);
             PollResult result =(PollResult) Encoder.Decode(toDecode,PollResult.class);
-            // ClientCommunicator.SINGLETON().testSend();
+            if(result.isSuccess())
+            {
+                ClientFacade.getInstance().executeCommands(result.getCommands());
+            }
+            lastCommandNumber = lastCommandNumber + result.getCommands().length;
         }
     }
     public void stop()
     {
-        System.out.println("DONE!");
+        System.out.println("DONE POLLING!");
         running=false;
         mTimer.cancel();
         mTimer.purge();

@@ -37,6 +37,11 @@ public class GameFacade
         }
         return result;
     }
+    //This is the createGame that the CommandManager Sends
+    public void createGame(Game game){
+        gameList.addGame(game);
+    }
+    
     public void addObserver(Observer o)
     {
         gameList.addAnObserver(o);
