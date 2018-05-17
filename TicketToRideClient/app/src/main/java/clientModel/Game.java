@@ -1,7 +1,6 @@
 package clientModel;
 
 import android.annotation.TargetApi;
-
 import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
@@ -68,14 +67,6 @@ public class Game extends Observable
 
     public void setID(String ID) {
         this.ID = ID;
-    }
-
-    public int getCurrentPlayers() {
-        return currentPlayers;
-    }
-
-    public void setCurrentPlayers(int currentPlayers) {
-        this.currentPlayers = currentPlayers;
     }
 
     @Override
