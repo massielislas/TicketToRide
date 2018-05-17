@@ -1,7 +1,5 @@
 package communication;
 
-<<<<<<< HEAD
-=======
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -11,7 +9,6 @@ import java.net.InetSocketAddress;
  * Created by Topper on 5/14/2018.
  */
 
->>>>>>> integration
 public class ServerCommunicator {
 
     private final int MAX_WAITING = 20;
