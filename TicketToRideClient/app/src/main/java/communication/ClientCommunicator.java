@@ -1,6 +1,8 @@
 package communication;
 
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import java.io.IOException;
 import java.io.InputStream;
