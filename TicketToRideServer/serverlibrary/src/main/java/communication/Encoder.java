@@ -12,6 +12,11 @@ import java.io.InputStreamReader;
 
 public class Encoder
 {
+    private static final Encoder instance = new Encoder();
+    private Encoder(){}
+    public static Encoder getInstance() {
+        return instance;
+    }
     public String Encode(Object obj)
     {
         Gson gson = new Gson();

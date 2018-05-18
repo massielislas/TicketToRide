@@ -14,6 +14,7 @@ public class GameResult extends Result
 
     public GameResult(Game game)
     {
+        super(true, null);
         this.toReturn = game;
     }
 

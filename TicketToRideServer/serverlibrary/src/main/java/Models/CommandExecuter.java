@@ -10,11 +10,8 @@ public class CommandExecuter {
     public static CommandExecuter getInstance(){
         return instance;
     }
-    public void ExecuteCommands(Command[] commandsToExecute)
+    public Object ExecuteCommands(Command commandToExecute)
     {
-        for(Command c:commandsToExecute)
-        {
-            c.Execute();
-        }
+        return commandToExecute.Execute();
     }
 }

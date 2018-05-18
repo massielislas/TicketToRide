@@ -17,7 +17,7 @@ public class ClientCommunicator {
 
     public String post(URL url, String data)
     {
-        System.out.println("url: " + url + "\ndata: " + data);
+        System.out.println("url: " + url.toString() + "\ndata: " + data);
         try
         {
             HttpURLConnection http = (HttpURLConnection) url.openConnection();

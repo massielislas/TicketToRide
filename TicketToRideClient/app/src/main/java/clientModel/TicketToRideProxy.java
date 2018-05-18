@@ -28,7 +28,7 @@ public class TicketToRideProxy implements ITicketToRide {
         String jsonStr = Encoder.Encode(command);
         try
         {
-            URL url = new URL("http://" + host + ":" + port + "/command");
+            URL url = new URL("http://" + host.data + ":" + port.data + "/command");
             String json = client.post(url, jsonStr);
             if (json == null) return null;
             Object result = Encoder.Decode(json, LoginRegisterResult.class);
