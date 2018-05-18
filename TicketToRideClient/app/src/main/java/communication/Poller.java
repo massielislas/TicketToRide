@@ -50,9 +50,11 @@ public class Poller {
                     null,
                     null,
                     paramTypeArray,
-                    params);
+                    params,
+                    "PollResult.class");
             String toSend = Encoder.Encode(pollCommand);
-            String toDecode = ClientCommunicator.getClient().post(url,toSend);
+            Object[] paramObjects = {url, toSend};
+            String toDecode = ClientCommunicator.getClient().post(paramObjects);
             PollResult result =(PollResult) Encoder.Decode(toDecode,PollResult.class);
             if(result.isSuccess())
             {

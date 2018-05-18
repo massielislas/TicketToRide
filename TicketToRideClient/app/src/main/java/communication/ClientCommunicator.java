@@ -16,25 +16,6 @@ public class ClientCommunicator {
     public static ClientCommunicator getClient() {
         return client;
     }
-
-<<<<<<< HEAD
-    public String post(URL url, String data)
-    {
-        System.out.println("url: " + url.toString() + "\ndata: " + data);
-        try
-        {
-            HttpURLConnection http = (HttpURLConnection) url.openConnection();
-            http.setRequestMethod("POST");
-            http.setDoOutput(true); //request body!
-            http.addRequestProperty("Accept", "application/json");
-            http.connect();
-            PrintWriter out = new PrintWriter(http.getOutputStream());
-            out.write(data);
-            //System.out.println(data);
-            out.flush();
-            out.close();
-            if (http.getResponseCode() == HttpURLConnection.HTTP_OK)
-=======
 //    public String post(URL url, String data)
 //    {
 //        System.out.println("url: " + url + "\ndata: " + data);
@@ -82,7 +63,6 @@ public class ClientCommunicator {
         protected Void doInBackground(Object... objects) {
             System.out.println("url: " + ((URL) objects[0]).toString() + "\ndata: " + (String) objects[1]);
             try
->>>>>>> 2b7931c27346e5a04f29e39d9f45d1b47ecf4fd6
             {
                 HttpURLConnection http = (HttpURLConnection) ((URL) objects[0]).openConnection();
                 http.setRequestMethod("POST");

@@ -29,19 +29,12 @@ public class TicketToRideProxy implements ITicketToRide {
         String jsonStr = Encoder.Encode(command);
         try
         {
-<<<<<<< HEAD
-            URL url = new URL("http://" + host.data + ":" + port.data + "/command/");
-            String json = client.post(url, jsonStr);
-=======
             URL url = new URL("http://" + host.data + ":" + port.data + "/command");
-
             Object[] objects = new Object[3];
             objects[0] = url;
             objects[1] = jsonStr;
             objects[2] = "";
             String json = client.post(objects);
-
->>>>>>> 2b7931c27346e5a04f29e39d9f45d1b47ecf4fd6
             if (json == null) return null;
             Object result = Encoder.Decode(json, LoginRegisterResult.class);
             //Start the poller
