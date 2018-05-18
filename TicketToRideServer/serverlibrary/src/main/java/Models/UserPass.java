@@ -40,13 +40,10 @@ public class UserPass {
         }
 
         return true;
-<<<<<<< HEAD
-=======
     }
 
     @Override
     public int hashCode() {
         return nameOrPassword.hashCode();
->>>>>>> 2b7931c27346e5a04f29e39d9f45d1b47ecf4fd6
     }
 }

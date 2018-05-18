@@ -38,7 +38,7 @@ public class TicketToRideProxy implements ITicketToRide {
             if (json == null) return null;
             Object result = Encoder.Decode(json, LoginRegisterResult.class);
             //Start the poller
-            Poller.getInstance().run(username);
+//            Poller.getInstance().run(username);
             return (LoginRegisterResult)result;
         }
         catch (MalformedURLException exception)

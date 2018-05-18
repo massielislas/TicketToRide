@@ -1,21 +1,9 @@
 package communication;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-
-<<<<<<< HEAD
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-=======
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
->>>>>>> 2b7931c27346e5a04f29e39d9f45d1b47ecf4fd6
-
 import Models.Command;
-import Models.CommandExecuter;
 
 
 /**
@@ -24,37 +12,37 @@ import Models.CommandExecuter;
 
 public class CommandHandler implements HttpHandler {
 
-<<<<<<< HEAD
-    public void handle(HttpExchange exchange) throws IOException {
-            String gsonString = readString(exchange.getRequestBody());
-            Command command = (Command) Encoder.getInstance().Decode(gsonString, Command.class);
-            Object toReturn = CommandExecuter.getInstance().ExecuteCommands(command);
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-            writeString(Encoder.getInstance().Encode(toReturn), exchange.getResponseBody());
-            exchange.getResponseBody().close();
-        }
-
-    private void writeString(String str, OutputStream os) throws IOException {
-        OutputStreamWriter sw = new OutputStreamWriter(os);
-        sw.write(str);
-        sw.flush();
-    }
-
-    private static String readString(InputStream is) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        InputStreamReader sr = new InputStreamReader(is);
-        char[] buf = new char[1024];
-        int len;
-        while ((len = sr.read(buf)) > 0) {
-            sb.append(buf, 0, len);
-        }
-        return sb.toString();
-=======
+//<<<<<<< HEAD
+//    public void handle(HttpExchange exchange) throws IOException {
+//            String gsonString = readString(exchange.getRequestBody());
+//            Command command = (Command) Encoder.getInstance().Decode(gsonString, Command.class);
+//            Object toReturn = CommandExecuter.getInstance().ExecuteCommands(command);
+//            exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+//            writeString(Encoder.getInstance().Encode(toReturn), exchange.getResponseBody());
+//            exchange.getResponseBody().close();
+//        }
+//
+//    private void writeString(String str, OutputStream os) throws IOException {
+//        OutputStreamWriter sw = new OutputStreamWriter(os);
+//        sw.write(str);
+//        sw.flush();
+//    }
+//
+//    private static String readString(InputStream is) throws IOException {
+//        StringBuilder sb = new StringBuilder();
+//        InputStreamReader sr = new InputStreamReader(is);
+//        char[] buf = new char[1024];
+//        int len;
+//        while ((len = sr.read(buf)) > 0) {
+//            sb.append(buf, 0, len);
+//        }
+//        return sb.toString();
+//=======
     public void handle(HttpExchange exchange) {
         try {
             System.out.println("HELLO");
             InputStreamReader ISR = new InputStreamReader(exchange.getRequestBody());
-            Encoder encode = new Encoder();
+            Encoder encode = Encoder.getInstance();
             Command toExecute = (Command) encode.Decode(ISR, Command.class);
             Class c = Class.forName(toExecute.getResultClassType());
             Object o = toExecute.Execute();
@@ -76,6 +64,5 @@ public class CommandHandler implements HttpHandler {
         catch (Exception e) {
             e.printStackTrace();
         }
->>>>>>> 2b7931c27346e5a04f29e39d9f45d1b47ecf4fd6
     }
 }

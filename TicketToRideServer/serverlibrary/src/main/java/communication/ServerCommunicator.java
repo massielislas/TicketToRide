@@ -25,7 +25,7 @@ public class ServerCommunicator {
         }
         server.setExecutor(null);
 
-        server.createContext("/command/", new CommandHandler());
+        server.createContext("/command", new CommandHandler());
 
         server.start();
 

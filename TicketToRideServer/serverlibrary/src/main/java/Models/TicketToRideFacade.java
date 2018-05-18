@@ -75,7 +75,8 @@ public class TicketToRideFacade implements ITicketToRide {
                     null,
                     null,
                     methodParamTypes,
-                    methodParams);
+                    methodParams,
+                    "Result.class");
             CommandManager.getInstance().addCommandAllUSers(newGameCommand);
             return new GameResult(newGame);
         }
