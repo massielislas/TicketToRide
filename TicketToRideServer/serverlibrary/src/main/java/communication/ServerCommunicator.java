@@ -23,7 +23,6 @@ public class ServerCommunicator {
             System.out.println("Error starting server");
             return;
         }
-
         server.setExecutor(null);
 
         server.createContext("/command", new CommandHandler());
