@@ -1,5 +1,6 @@
 package clientModel;
 
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -24,12 +25,23 @@ public class TicketToRideProxy implements ITicketToRide {
         Object[] methodArguments = {username, password, host, port};
         Command command = new Command("TicketToRideFacade", "getInstance",
                 "loginUser", instanceParamTypeNames, instanceMethodArgs, methodParamTypeNames,
-                methodArguments);
+                methodArguments, "clientResult.LoginRegisterResult");
         String jsonStr = Encoder.Encode(command);
         try
         {
+<<<<<<< HEAD
             URL url = new URL("http://" + host.data + ":" + port.data + "/command/");
             String json = client.post(url, jsonStr);
+=======
+            URL url = new URL("http://" + host.data + ":" + port.data + "/command");
+
+            Object[] objects = new Object[3];
+            objects[0] = url;
+            objects[1] = jsonStr;
+            objects[2] = "";
+            String json = client.post(objects);
+
+>>>>>>> 2b7931c27346e5a04f29e39d9f45d1b47ecf4fd6
             if (json == null) return null;
             Object result = Encoder.Decode(json, LoginRegisterResult.class);
             //Start the poller
@@ -53,12 +65,16 @@ public class TicketToRideProxy implements ITicketToRide {
 
         Command command = new Command("TicketToRideFacade", "getInstance",
                 "registerUser", instanceParamTypeNames, instanceMethodArgs, methodParamTypeNames,
-                methodArguments);
+                methodArguments, "clientResult.LoginRegisterResult");
         String jsonStr = Encoder.Encode(command);
         try
         {
-            URL url = new URL("http://" + host + ":" + port + "/command");
-            String json = client.post(url, jsonStr);
+            URL url = new URL("http://" + host.data + ":" + port.data + "/command");
+            Object[] objects = new Object[3];
+            objects[0] = url;
+            objects[1] = jsonStr;
+            objects[2] = "";
+            String json = client.post(objects);
             if (json == null) return null;
             Object result = Encoder.Decode(json, LoginRegisterResult.class);
             //Start the poller
@@ -81,12 +97,16 @@ public class TicketToRideProxy implements ITicketToRide {
 
         Command command = new Command("TicketToRideFacade", "getInstance",
                 "addPlayerToGame", instanceParamTypeNames, instanceMethodArgs, methodParamTypeNames,
-                methodArguments);
+                methodArguments, "clientResult.GameResult");
         String jsonStr = Encoder.Encode(command);
         try
         {
-            URL url = new URL("http://" + userData.getHost() + ":" + userData.getPort() + "/command");
-            String json = client.post(url, jsonStr);
+            URL url = new URL("http://" + userData.getHost().data + ":" + userData.getPort().data + "/command");
+            Object[] objects = new Object[3];
+            objects[0] = url;
+            objects[1] = jsonStr;
+            objects[2] = "";
+            String json = client.post(objects);
             if (json == null) return null;
             Object result = Encoder.Decode(json, Result.class);
             return (Result)result;
@@ -108,12 +128,16 @@ public class TicketToRideProxy implements ITicketToRide {
 
         Command command = new Command("TicketToRideFacade", "getInstance",
                 "createNewGame", instanceParamTypeNames, instanceMethodArgs, methodParamTypeNames,
-                methodArguments);
+                methodArguments, "clientResult.GameResult");
         String jsonStr = Encoder.Encode(command);
         try
         {
-            URL url = new URL("http://" + userData.getHost() + ":" + userData.getPort() + "/command");
-            String json = client.post(url, jsonStr);
+            URL url = new URL("http://" + userData.getHost().data + ":" + userData.getPort().data + "/command");
+            Object[] objects = new Object[3];
+            objects[0] = url;
+            objects[1] = jsonStr;
+            objects[2] = "";
+            String json = client.post(objects);
             if (json == null) return null;
             Object result = Encoder.Decode(json, GameResult.class);
             return (GameResult)result;
@@ -133,13 +157,17 @@ public class TicketToRideProxy implements ITicketToRide {
         Object[] methodArguments = {game};
         Command command = new Command("TicketToRideFacade", "getInstance",
                 "startGame", instanceParamTypeNames, instanceMethodArgs, methodParamTypeNames,
-                methodArguments);
+                methodArguments, "clientResult.GameStartResult");
 
         String jsonStr = Encoder.Encode(command);
         try
         {
-            URL url = new URL("http://" + userData.getHost() + ":" + userData.getPort() + "/command");
-            String json = client.post(url, jsonStr);
+            URL url = new URL("http://" + userData.getHost().data + ":" + userData.getPort().data + "/command");
+            Object[] objects = new Object[3];
+            objects[0] = url;
+            objects[1] = jsonStr;
+            objects[2] = "";
+            String json = client.post(objects);
             if (json == null) return null;
             Object result = Encoder.Decode(json, GameStartResult.class);
             return (GameStartResult)result;

@@ -14,14 +14,11 @@ public class UserPass {
     private final int MAXLENGTH = 40;
     private String nameOrPassword;
 
-    public boolean verify()
-    {
-        if (nameOrPassword == null)
-        {
+    public boolean verify() {
+        if (nameOrPassword == null) {
             return false;
         }
-        if (nameOrPassword.length() > MAXLENGTH)
-        {
+        if (nameOrPassword.length() > MAXLENGTH) {
             return false;
         }
         return true;
@@ -43,5 +40,13 @@ public class UserPass {
         }
 
         return true;
+<<<<<<< HEAD
+=======
+    }
+
+    @Override
+    public int hashCode() {
+        return nameOrPassword.hashCode();
+>>>>>>> 2b7931c27346e5a04f29e39d9f45d1b47ecf4fd6
     }
 }

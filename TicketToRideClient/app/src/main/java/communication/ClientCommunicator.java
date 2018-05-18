@@ -1,5 +1,7 @@
 package communication;
 
+import android.os.AsyncTask;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,6 +17,7 @@ public class ClientCommunicator {
         return client;
     }
 
+<<<<<<< HEAD
     public String post(URL url, String data)
     {
         System.out.println("url: " + url.toString() + "\ndata: " + data);
@@ -31,44 +34,137 @@ public class ClientCommunicator {
             out.flush();
             out.close();
             if (http.getResponseCode() == HttpURLConnection.HTTP_OK)
+=======
+//    public String post(URL url, String data)
+//    {
+//        System.out.println("url: " + url + "\ndata: " + data);
+//        try
+//        {
+//            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+//            http.setRequestMethod("POST");
+//            http.setDoOutput(true); //request body!
+//            http.addRequestProperty("Accept", "application/json");
+//            http.connect();
+//            PrintWriter out = new PrintWriter(http.getOutputStream());
+//            out.write(data);
+//            //System.out.println(data);
+//            out.flush();
+//            out.close();
+//            if (http.getResponseCode() == HttpURLConnection.HTTP_OK)
+//            {
+//                return readString(http.getInputStream());
+//            }
+//            else
+//            {
+//                System.out.println("Error in post response\nCode: " + http.getResponseMessage());
+//                return null;
+//            }
+//        }
+//        catch(IOException error)
+//        {
+//            System.out.println("Error in post method!\n" + error.getStackTrace());
+//            return null;
+//        }
+//    }
+
+    public String post(Object[]objects){
+        PostTask postTask = new PostTask();
+        postTask.execute(objects);
+        return (String) (objects[2]);
+    }
+    /**
+     * First parameter is the URL
+     * second parameter is the data string
+     * third parameter is the return string
+     */
+    public class PostTask extends AsyncTask<Object, Void, Void>{
+        @Override
+        protected Void doInBackground(Object... objects) {
+            System.out.println("url: " + ((URL) objects[0]).toString() + "\ndata: " + (String) objects[1]);
+            try
+>>>>>>> 2b7931c27346e5a04f29e39d9f45d1b47ecf4fd6
             {
-                return readString(http.getInputStream());
+                HttpURLConnection http = (HttpURLConnection) ((URL) objects[0]).openConnection();
+                http.setRequestMethod("POST");
+                http.setDoOutput(true); //request body!
+                http.addRequestProperty("Accept", "application/json");
+                http.connect();
+                PrintWriter out = new PrintWriter(http.getOutputStream());
+                out.write(((String) objects[1]));
+                //System.out.println(data);
+                out.flush();
+                out.close();
+                if (http.getResponseCode() == HttpURLConnection.HTTP_OK)
+                {
+                    objects[2] = readString(http.getInputStream());
+                }
+                else
+                {
+                    System.out.println("Error in post response\nCode: " + http.getResponseMessage());
+                    objects[2] = null;
+                }
             }
-            else
+            catch(IOException error)
             {
-                System.out.println("Error in post response\nCode: " + http.getResponseMessage());
-                return null;
+                System.out.println("Error in post method!\n" + error.getStackTrace());
+                objects[2] = null;
             }
-        }
-        catch(IOException error)
-        {
-            System.out.println("Error in post method!\n" + error.getStackTrace());
+
             return null;
         }
     }
 
-    public String get(URL url)
-    {
-        try
-        {
-            HttpURLConnection http = (HttpURLConnection) url.openConnection();
-            http.setRequestMethod("GET");
-            http.setDoOutput(false); //no request body
-            http.addRequestProperty("Accept", "application/json");
-            http.connect();
-            if (http.getResponseCode() == HttpURLConnection.HTTP_OK)
-            {
-                return readString(http.getInputStream());
+
+//    public String get(URL url)
+//    {
+//        try
+//        {
+//            HttpURLConnection http = (HttpURLConnection) url.openConnection();
+//            http.setRequestMethod("GET");
+//            http.setDoOutput(false); //no request body
+//            http.addRequestProperty("Accept", "application/json");
+//            http.connect();
+//            if (http.getResponseCode() == HttpURLConnection.HTTP_OK)
+//            {
+//                return readString(http.getInputStream());
+//            }
+//            else
+//            {
+//                System.out.println("Error in getResponseCode: " + http.getResponseMessage());
+//                return null;
+//            }
+//        }
+//        catch(IOException error)
+//        {
+//            System.out.println("Error in post method!\n" + error.getStackTrace());
+//            return null;
+//        }
+//    }
+
+    /**
+     * First parameter is the URL, second parameter is the return string
+     */
+    private class GetTask extends AsyncTask<Object, Void, Void>{
+        @Override
+        protected Void doInBackground(Object... objects) {
+            try {
+                HttpURLConnection http = (HttpURLConnection) ((URL)objects[0]).openConnection();
+                http.setRequestMethod("GET");
+                http.setDoOutput(false); //no request body
+                http.addRequestProperty("Accept", "application/json");
+                http.connect();
+                if (http.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    objects[1] = readString(http.getInputStream());
+                }
+                else {
+                    System.out.println("Error in getResponseCode: " + http.getResponseMessage());
+                    objects[1] = null;
+                }
             }
-            else
-            {
-                System.out.println("Error in getResponseCode: " + http.getResponseMessage());
-                return null;
+            catch(IOException error) {
+                System.out.println("Error in post method!\n" + error.getStackTrace());
+                objects[1] = null;
             }
-        }
-        catch(IOException error)
-        {
-            System.out.println("Error in post method!\n" + error.getStackTrace());
             return null;
         }
     }
